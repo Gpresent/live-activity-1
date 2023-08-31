@@ -5,13 +5,12 @@ Example: Division by zero fault, not handled.
 #include <iostream>
 using namespace std;
 
-float divide(float numerator, float denominator)
-{
+float divide(float numerator, float denominator) {
+	if (denominator == 0) throw std::runtime_error("Division by zero condition!");
 	return (numerator / denominator);
 }
 
-int main()
-{
+int main() {
 	float numerator;
 	float denominator;
 	float quotient;
@@ -21,6 +20,11 @@ int main()
 	cout << "Enter the denominator: ";
 	cin >> denominator;
 
-	quotient = divide(numerator, denominator);
-	cout << "The quotient is: " << quotient << endl;
+	try {
+		quotient = divide(numerator, denominator);
+		cout << "The quotient is: " << quotient << endl;
+	}
+	catch (exception& e) {
+		cout << "Exception caught - Math error: Zero division" << endl;
+	}
 }
